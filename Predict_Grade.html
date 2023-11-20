@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        #questions {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Let's Predict Your Grade!</h1>
+
+    <div id="questions">
+        <p id="question"></p>
+        <button onclick="answerQuestion('yes')">Yes</button>
+        <button onclick="answerQuestion('no')">No</button>
+    </div>
+
+    <div id="result"></div>
+
+    <script>
+        let currentQuestionIndex = 0;
+        let yesResponses = 0;
+        const questions = [
+            'I always preview the material that will be discussed before I go to class.',
+            'I go over my lecture notes as soon as possible after lecture to rework them and note problem areas.',
+            'I try to do my homework without using example problems as a guide or copying answers from my class notes or textbook.',
+            'I regularly go to office hours or tutoring to discuss problems or questions about the homework.',
+            'I rework all of the homework problems and questions before the test or quiz.',
+            'I spend some time studying for this class at least five days per week outside of class.',
+            'I make mnemonics for myself to help me remember facts and equations.',
+            'I make diagrams or draw mental pictures of the concepts discussed in class.',
+            'I participate in a study group where we do homework and quiz ourselves on the material.',
+            'I rework all of the quiz and test items I have missed before the next class session.',
+            'I realize that I can still do well in this class even if I have done poorly on the quizzes and tests up to this point.'
+        ];
+
+        function answerQuestion(response) {
+            if (response === 'yes') {
+                yesResponses++;
+            }
+
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < questions.length) {
+                displayQuestion();
+            } else {
+                displayResult();
+            }
+        }
+
+        function displayQuestion() {
+            const questionElement = document.getElementById('question');
+            questionElement.textContent = questions[currentQuestionIndex];
+        }
+
+        function displayResult() {
+            const resultElement = document.getElementById('result');
+            let potentialGrade;
+
+            if (yesResponses <= 2) {
+                potentialGrade = 'F';
+            } else if (yesResponses <= 3) {
+                potentialGrade = 'F';
+            } else if (yesResponses <= 5) {
+                potentialGrade = 'D';
+            } else if (yesResponses <= 8) {
+                potentialGrade = 'B';
+            } else if (yesResponses <= 11) {
+                potentialGrade = 'A';
+            }
+
+            resultElement.textContent = `Your potential score based on your responses is: ${potentialGrade}`;
+        }
+
+        // Initial display
+        displayQuestion();
+    </script>
+</body>
+</html>
